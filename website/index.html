@@ -61,7 +61,7 @@
             <h5>Brush Color</h5>
             <div class="col-10" style="width:100px !important;">
                <input autocomplete="off" id="colorChange" class="form-control" type="color" value="#000002" oninput="setColor(this.value)">
-               <p id="colorChangeText">#000002</p>
+               <p id="colorChangeText">#000000</p>
             </div>
          </div>
          <div style="float: left; margin-left:20px;">
@@ -71,9 +71,9 @@
                <p id="sliderChangeText">5</p>
             </div>
          </div>
-         <div style="float: left; margin-left:100px;">
+         <div style="float: left; margin-left:150px;">
             <h5>User Controls</h5>
-              <div style="width: 50%;">
+              <div style="width: 300px;">
               <button id = "loadFile" type="button" class="btn btn-primary userControl" onclick = "setDraw()">Draw</button>
               <button id = "loadFile" type="button" class="btn btn-primary userControl" onclick = "setErase()">Erase</button>
               <button id = "saveCanvas" type="button" class="btn btn-primary userControl" onclick = "saveBtnClicked()">Save Canvas</button>
@@ -95,6 +95,7 @@
       <div id="roomdiv">
          <form class="centered" style="margin-bottom:10px;" onsubmit="enterRoom();return false;">
             <div class="mb-3">
+              <img width="100%" height="100%" src="/logo.png"></img>
                <p id = "errorText" style="color:red;margin-bottom:0;margin-top:0;">Error</p>
                <label class="form-label">Username</label>
                <input type="text" class="form-control" id="usernameInput" pattern="^[a-zA-Z0-9]+$" title="Usernames should not contain any special characters">

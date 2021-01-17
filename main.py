@@ -46,6 +46,10 @@ def script():
 def css():
   return send_file('website/style.css', cache_timeout=0)
 
+@app.route('/logo.png')
+def logo():
+  return send_file('logo.png', cache_timeout=0)
+
 # ?
 @socketio.on('json')
 def handle_json(json):

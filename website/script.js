@@ -171,53 +171,6 @@ function onresize(){
   document.getElementById('canvasDiv').setAttribute("style",`width:${window.innerWidth-400}px;height:${window.innerHeight-200}px`);
 
   document.getElementById('settingBox').setAttribute("style",`height:${window.innerHeight-285}px`);
-
-  //var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-
-
-  /*
-  if(isresize == false){
-    isresize = true;
-    var canvasURI = canvas.toDataURL("image/png");
-    console.log(canvasURI)
-    //console.log(imageData)
-    var img = new Image;
-
-    var previousCanvasWidth = canvas.width;
-    var previousCanvasHeight = canvas.height;
-
-    
-    img.onload = function(){
-      canvas.width = window.innerWidth-300;
-      canvas.height = window.innerHeight-300;
-      //ctx.scale((canvas.width) / previousCanvasWidth, (canvas.height) / previousCanvasHeight);
-      ctx.drawImage(img,0,0,previousCanvasWidth,previousCanvasHeight);
-      //ctx.drawImage(img,0,0,canvas.width,canvas.height);
-    }
-    img.src = canvasURI;
-    
-  
-    
-    
-    //var cImage = putImageData(ctx, imageData, 0, 0)
-
-    drawImage(canvasURI);
-    isresize = false;
-  }
-  /*
-  for(var i=0;i<strokes.length;++i){
-    ctx.beginPath();
-    ctx.lineWidth = strokes[i][1];
-    ctx.lineCap = 'round';
-    ctx.strokeStyle = strokes[i][0];
-    ctx.moveTo(strokes[i][2],strokes[i][3]);
-    ctx.lineTo(strokes[i][4],strokes[i][5]);
-    ctx.stroke();
-  }
-  */
-
-  //document.getElementById('settingBox').setAttribute("style",`height:${canvas.height}px`);
-  
 }
 
 function keyDown(e){
@@ -564,63 +517,9 @@ function addPerson(person,isHost=false){
   console.log(addPerson.caller)
   var chat = document.getElementById("peopleContainer");
   
-  /*
-  var template = document.getElementById("personTemplate");
   
-  var nel = template.cloneNode(true);
-  nel.id = person
-  nel.style.display = "block";
-
-  chat.appendChild(nel);
-  */
   console.log("Creating person")
 
-  //for(var i=0;i<nel.children.length;++i){
-    /*
-    var child = nel.children[i];
-    console.log("NC "+child+"="+child)
-    var name = child.getAttribute("name");
-    console.log("HELP "+name);
-    if(name == "personIcon"){
-      child.src = "https://ui-avatars.com/api/?name="+person;
-    } else if(name == "personName") {
-      if(isHost){
-        child.textContent = person+" (Host)";
-      } else {
-        child.textContent = person;
-      }
-    } else if(name == "personDraw") {
-      if(amHost) {
-        child.style.hidden = false
-        child.addEventListener("click",() => {
-          socket.emit(
-            "toggleDraw",
-            {"username":person,"roomCode":roomid},
-          )  
-        });
-      } else {
-        child.style.display = "none"
-        child.remove()
-      }
-    } else if(name == "personKick") {
-      alert("check kick " + amHost)
-      if(amHost) {
-        child.style.hidden = false
-        child.addEventListener("click",() => {
-          socket.emit(
-            "kickPerson",
-            {
-              "username":person,
-              "roomCode":roomid
-            },
-          )  
-        });
-      } else {
-        child.style.display = "none"
-        alert("removed kick")
-        child.remove()
-      }
-      */
 
       htmlTemplate = `<div id="${person}" style="border: 2px solid #2c2f33;"> <image name="personIcon" src = "https://ui-avatars.com/api/?name=${person}" style="height:50px;width:50px;display:inline-block;margin-left:5px;${(isHost)? "border: 2px solid #008000;":"border: 2px solid #C0C0C0;"}"></image><p name="personName" style="display:inline-block;margin-left:10px;">${(isHost)? person + " (Host)" : person}</p>`
 
@@ -712,20 +611,9 @@ socket.on("drawPicture", pictureData => {
 socket.on("clearCanvas",() => {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 })
-
-
-/*socket.on("socketDraw",function(data){
-
-});*/
-
-
-
-/*
-const socket = new WebSocket("ws://"+WEBSOCKURL);
-socket.addEventListener("open",function(event){
-
-})
-
-socket.addEventListener("draw",function(event){
-  
-})*/
+function setDraw(){
+  brush = 0
+}
+function setErase(){
+  brush = 1
+}
