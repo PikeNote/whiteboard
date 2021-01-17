@@ -5,7 +5,7 @@
 <h1 align="center">Virtual Whiteboard</h1>
 Hello! This our team (Team Procrasination)'s submission for Hack the Northeast!
 
-This is our virtual whiteboard which you can try it out [here](https://pythonsocket.procrastinators.repl.co/).
+This is our virtual whiteboard which you can try it out [here](https://home.virtualwhiteboard.tech/).
 
 The whiteboard allows students and teachers to join one room and be able to share drawings on a single whiteboard. There are many moderation features that allow you control the rooms on top of the expansive set of features like marker size and color control.  
   
