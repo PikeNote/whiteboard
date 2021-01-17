@@ -9,6 +9,8 @@ var brushcolor = "#000000"
 var brushsize = 5;
 var isdone = 1;
 
+var scale = []
+
 var amHost = false;
 var canDraw = false;
 var disableDraw = false;
@@ -203,12 +205,12 @@ function draw(e){
     }
     ctx.strokeStyle = temp;
 
-    var st = [temp,brushsize,curpos.x,curpos.y];
-    ctx.moveTo(curpos.x, curpos.y);
+    var st = [temp,brushsize,curpos.x/scale[0],curpos.y/scale[1]];
+    ctx.moveTo(curpos.x/scale[0], curpos.y/scale[1]);
     setPosition(e);
-    ctx.lineTo(curpos.x, curpos.y);
-    st.push(curpos.x);
-    st.push(curpos.y);
+    ctx.lineTo(curpos.x/scale[0], curpos.y/scale[1]);
+    st.push(curpos.x/scale[0]);
+    st.push(curpos.y/scale[1]);
     
     ctx.stroke();
     strokes.push(st);
@@ -462,7 +464,7 @@ socket.on("pushCanvas", function(data){
   var img = new Image;
   
   img.onload = function(){
-    var scale = [1,1]
+    scale = [1,1]
     reswidth = window.screen.width * window.devicePixelRatio - 425;
     resheight = window.screen.height * window.devicePixelRatio - 400;
     console.log(resolution[0]+", "+reswidth);

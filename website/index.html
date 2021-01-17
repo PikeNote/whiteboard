@@ -60,7 +60,7 @@
          <div style="float: left; margin-left:20px;">
             <h5>Brush Color</h5>
             <div class="col-10" style="width:100px !important;">
-               <input autocomplete="off" id="colorChange" class="form-control" type="color" value="#000002" oninput="setColor(this.value)">
+               <input autocomplete="off" id="colorChange" class="form-control" type="color" value="#000000" oninput="setColor(this.value)">
                <p id="colorChangeText">#000000</p>
             </div>
          </div>
@@ -98,7 +98,7 @@
               <img width="100%" height="100%" src="/logo.png"></img>
                <p id = "errorText" style="color:red;margin-bottom:0;margin-top:0;">Error</p>
                <label class="form-label">Username</label>
-               <input type="text" class="form-control" id="usernameInput" pattern="^[a-zA-Z0-9]+$" title="Usernames should not contain any special characters">
+               <input type="text" class="form-control" id="usernameInput" pattern="^[a-zA-Z0-9][a-zA-Z0-9\s]+[a-zA-Z0-9]$" title="Usernames should not contain any special characters">
             </div>
             <div class="mb-3">
                <label class="form-label">Room Code (Any)</label>
