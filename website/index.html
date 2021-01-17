@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width">
+      <title>Whiteboard</title>
+      <link href="style.css" rel="stylesheet" type="text/css" />
+      <script
+         src="https://code.jquery.com/jquery-3.5.1.min.js"
+         integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+         crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.4.0/socket.io.js"></script>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+      <script src="script.js"></script>
+   </head>
+   <body onload="activate();" class="bg-dark">
+      <div id="canvasDiv" class="canvasDiv">
+         <!-- -->
+         <canvas oncontextmenu="return false;" class="canvas" id="canvas" width="10000px" height="5000px" style="background-color: white !important;margin-top: 20px !important;margin-left: 20px !important;"></canvas>
+      </div>
+      <div id="settingBox" class="settingDiv">
+         <button class="btn btn-secondary active tabButton" data-toggle="button" aria-pressed="true" id="openchatbtn" autocomplete="off" onclick="openChatTab()" disabled>Chat</button>
+         <button class="btn btn-secondary tabButton" data-toggle="button" aria-pressed="false" id="openpeoplebtn" autocomplete="off" onclick="openPeopleTab()">People</button>
+         <button class="btn btn-secondary tabButton" data-toggle="button" aria-pressed="false" id="opensettingsbtn" autocomplete="off" onclick="openSettingsTab()">Settings</button>
+         <div id="chatContainer">
+            <div id="chatBox"></div>
+            <div id = "chatInputDiv">
+               <div class="input-group mb-3">
+                  <textarea id="chatInput" class="form-control" rows="3", style="resize: none;height:80px;"></textarea>
+                  <div class="input-group-append">
+                     <button class="btn btn-primary" type="button" onclick="chatBtnClicked()">Send</button>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div id="peopleContainer" style="display: none;">
+         </div>
+         <div id="settingsContainer" style="display: none;margin-left:10px;">
+            <h4 id="roomCodeLabel" style="margin-top:15px"></h4>
+            <h4>Room is <span class="badge badge-pill bg-success" id="roomLockedLabel">unlocked</span></h4>
+            <h4>Chat is <span class="badge badge-pill bg-success" id="chatLockedLabel">unlocked</span></h4>
+            <button class="btn btn-secondary active" data-toggle="button" aria-pressed="false" id="lockRoomBtn" autocomplete="off" onclick="lockRoomClicked()" >Lock/Unlock Room</button>
+            <button class="btn btn-secondary active" data-toggle="button" aria-pressed="false" id="lockChatBtn" autocomplete="off" onclick="lockChatClicked()" >Lock/Unlock Chat</button>
+         </div>
+      </div>
+      </div>
+      </div>
+
+         
+
+      </div>
+      <div style="width:78%;height:150px; overflow:hidden;" class="canvasSettings">
+        <div style1="text-align:center;" class="">
+         <h5>Your drawings are:</h5>
+         <h5><span class="badge badge-pill bg-danger" id="canDrawLabel">private</span></h5>
+         </div>
+         
+        <div>
+         <div style="float: left; margin-left:20px;">
+            <h5>Brush Color</h5>
+            <div class="col-10" style="width:100px !important;">
+               <input autocomplete="off" id="colorChange" class="form-control" type="color" value="#000002" oninput="setColor(this.value)">
+               <p id="colorChangeText">#000002</p>
+            </div>
+         </div>
+         <div style="float: left; margin-left:20px;">
+            <h5>Brush Size</h5>
+            <div class="col-10" style="width:100px !important;">
+               <input autocomplete="off" type="range" min="1" max="100" value="5" class="slider" id="brushSizeSlider" oninput="setScale(this.value)">
+               <p id="sliderChangeText">5</p>
+            </div>
+         </div>
+         <div style="float: left; margin-left:100px;">
+            <h5>User Controls</h5>
+              <div style="width: 50%;">
+              <button id = "loadFile" type="button" class="btn btn-primary userControl" onclick = "setDraw()">Draw</button>
+              <button id = "loadFile" type="button" class="btn btn-primary userControl" onclick = "setErase()">Erase</button>
+              <button id = "saveCanvas" type="button" class="btn btn-primary userControl" onclick = "saveBtnClicked()">Save Canvas</button>
+              <button id = "loadCanvas" type="button" class="btn btn-primary userControl" onclick = "loadBtnClicked()">Load Canvas</button>
+            
+              <button id = "clearCanvas" type="button" class="btn btn-primary userControl" onclick="clearBtnClicked()">Clear Canvas</button>
+              <button id = "saveFile" type="button" class="btn btn-primary userControl" onclick = "saveFileClicked()">Save File</button>
+              
+
+              
+              <button id = "loadFile" type="button" class="btn btn-primary userControl" onclick = "fileDialogueLoad()">Load File</button>
+              <input type="file" id="loading_file" accept="image/*" style="display: none;">
+             </div>
+            <br>
+         </div>
+        </div>
+      </div>
+      </div>
+      <div id="roomdiv">
+         <form class="centered" style="margin-bottom:10px;" onsubmit="enterRoom();return false;">
+            <div class="mb-3">
+               <p id = "errorText" style="color:red;margin-bottom:0;margin-top:0;">Error</p>
+               <label class="form-label">Username</label>
+               <input type="text" class="form-control" id="usernameInput" pattern="^[a-zA-Z0-9]+$" title="Usernames should not contain any special characters">
+            </div>
+            <div class="mb-3">
+               <label class="form-label">Room Code (Any)</label>
+               <input type="text" class="form-control" id="roomCodeInput" pattern="^[a-zA-Z0-9]+$" title="Room codes should not contain any special characters">
+            </div>
+            <button type="submit" class="btn btn-primary" >Submit</button>
+         </form>
+      </div>
+      <div id="overlay"></div>
+      <p class="mb-1" style="text-align: center;margin-top:30px;">Made by Kevin Huang, Kieran Musser, and Rebecca Lee</p>
+   </body>
+</html>

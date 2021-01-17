@@ -1,0 +1,145 @@
+body {
+  color:white !important;
+}
+
+.canvas {
+  float: left;
+  flex: 1;
+}
+
+.settingDiv {
+  background-color: #23272a;
+  border: 2px solid #2c2f33;
+
+  width:350px;
+  height: 400px;
+  float: right;
+  margin-top: 20px !important;
+  margin-right: 10px !important;
+
+  /*position: relative;*/
+  
+  /*overflow: auto;*/
+}
+
+#chatBox {
+  /*height: 650px;*/
+
+  height: 80%;
+  width: 350px;
+
+  /*position: absolute;
+  overflow: auto;*/
+  overflow: scroll;
+}
+#chatContainer {
+  height: 100%;
+  width: 100%;
+  
+}
+
+#chatInputDiv {
+  /*bottom: 8%;
+  position: absolute;*/
+}
+
+.canvasSettings {
+  margin-left: 20px !important;
+  background-color: #23272a;
+  border: 2px solid #2c2f33;
+  display: flex;
+  justify-content: center;
+}
+
+.canvasDiv {
+  display: block; 
+  float: left; 
+  overflow: auto;
+}
+
+
+
+#roomdiv {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width:30em;
+  height:18em;
+  margin-top: -9em; 
+  margin-left: -15em; 
+  border: 1px solid #ccc;
+  background-color: #23272a;
+  z-index: 420;
+}
+
+
+#overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 2;
+  cursor: pointer;
+}
+
+.centered {
+  right: 50%;
+  bottom: 50%;
+  transform: translate(50%,50%);
+  position: absolute;
+}
+
+.tabButton {
+  width: 32% !important;
+  margin-left: 1px;
+}
+
+
+.btn-circle { 
+  width: 30px; 
+  height: 30px; 
+  padding: 6px 0px; 
+  border-radius: 15px; 
+  font-size: 8px; 
+  text-align: center; 
+} 
+
+.btn-circle:focus {
+  outline:0;
+}
+
+.img-centered {
+  position: absolute;
+  transform: translate(-50%,-50%);
+  margin-right: -50%;
+  top: 50%;
+  left: 50%;
+}
+
+
+.btn-overlay {
+    position: absolute;
+    padding: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    opacity: 0.5;
+    transition: opacity .5s;
+    border-radius: 100%;
+}
+
+.center {
+  margin: auto;
+  width: 60%;
+  padding: 10px;
+}
+
+.userControl {
+   display: inline-flex;
+}
